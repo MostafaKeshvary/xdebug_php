@@ -1,0 +1,31 @@
+http:
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+  routers:
+    traefik-dashboard:
+      rule: Host(`traefik.tools.test`)
+      entryPoints:
+        - websecure
+      service: api@internal
+      tls: {}
+
+    xdebugـphp:
+      rule: Host(`xdebug.tools.test`)
+      entryPoints:
+        - websecure
+      service: xdebugـphp
+      tls: {}
+
+  services:
+    xdebugـphp:
+      loadBalancer:
+        servers:
+          - url: "http://xdebug_php:80"
+
+tls:
+  certificates:
+    - certFile: /certs/tools.test.crt
+      keyFile: /certs/tools.test.key

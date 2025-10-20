@@ -1,23 +1,35 @@
 services:
-  app:
+  traefik:
+    image: docker.arvancloud.ir/traefik:v3.2
+    container_name: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./config/traefik/traefik.yml:/traefik.yml:ro"
+      - "./config/traefik/dynamic_conf.yml:/dynamic_conf.yml:ro"
+      - "./config/traefik/certs:/certs:ro"
+    networks:
+      - app-network
+
+  xdebug_php:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: xdebug-php
+    container_name: xdebug_php
     extra_hosts:
       - "host.docker.internal:${WSL_HOST_IP}"
     volumes:
       - ./:/var/www/html
-    ports:
-      - "8000:80"
     networks:
       - app-network
     depends_on:
-      - db
+      - mysql
 
-  db:
-    image: mysql:8.4.3
-    container_name: mysql_db
+  mysql:
+    image: docker.arvancloud.ir/mysql:8.4.3
+    container_name: mysql
     environment:
       MYSQL_DATABASE: xdebug_php
       MYSQL_ROOT_PASSWORD: 123456

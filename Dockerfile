@@ -1,4 +1,4 @@
-FROM php:8.4.3-apache
+FROM docker.arvancloud.ir/php:8.4.3-apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 RUN apt-get update && apt-get install -y \

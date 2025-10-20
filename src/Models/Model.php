@@ -14,7 +14,7 @@ abstract class Model
     {
         try {
             $this->table = $table;
-            $this->pdo = new PDO('mysql:host=mysql_db;dbname=xdebug_php', 'root', '123456');
+            $this->pdo = new PDO('mysql:host=mysql;dbname=xdebug_php', 'root', '123456');
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
             die("Database connection error: " . $e->getMessage());
