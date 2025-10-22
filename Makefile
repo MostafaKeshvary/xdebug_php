@@ -13,11 +13,8 @@ up:
 	docker-compose up -d
 	@echo "✅ Docker is up and running!"
 	@echo "⚠️  Reminder: Windows Firewall may block Xdebug connections on port 9003."
-	@echo "⚠️  To allow Xdebug traffic, run the PowerShell script as Administrator:"
-	@echo "     1️⃣  Open PowerShell as Administrator"
-	@echo "     2️⃣  Navigate to the folder containing 'toggle-wsl-firewall.ps1'"
-	@echo "     3️⃣  Execute the script: '.\\\\toggle-wsl-firewall.ps1'"
-	@echo "     4️⃣  Follow the interactive prompts to disable the firewall for WSL"
+	@echo "⚠️  To allow Xdebug traffic, run command bellow in cmd as Administrator:"
+	@echo "     1netsh advfirewall firewall add rule name=\"Allow Xdebug\" dir=in action=allow protocol=TCP localport=9003"
 
 
 down:
