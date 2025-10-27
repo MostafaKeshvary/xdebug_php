@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
 use Illuminate\Http\Response;
 
@@ -14,7 +14,7 @@ $segments = explode('/', $path);
 $controllerName = ucfirst(array_shift($segments)) . 'Controller';
 $methodName = !empty($segments) ? array_shift($segments) : 'index';
 
-$controllerFile = __DIR__ . "/src/Controllers/$controllerName.php";
+$controllerFile = __DIR__ . "/../app/Controllers/$controllerName.php";
 
 if (file_exists($controllerFile)) {
     $fullClassName = "App\\Controllers\\$controllerName";

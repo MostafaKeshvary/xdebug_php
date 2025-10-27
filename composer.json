@@ -13,10 +13,11 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/"
+      "App\\": "app/"
     },
     "files": [
-      "src/library/helper.php"
+      "app/library/helpers.php"
     ]
   }
+
 }
