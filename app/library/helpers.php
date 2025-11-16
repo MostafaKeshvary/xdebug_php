@@ -16,6 +16,6 @@ if (!function_exists("response")) {
      */
     function response(mixed $content = '', int $status = 200, array $headers = []): Response
     {
-        return new Response($content, $status, $headers);
+        return new Response($content, $status, $headers)->send();
     }
 }
