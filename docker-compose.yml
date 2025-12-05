@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: docker.arvancloud.ir/traefik:v3.2
+    image: docker.arvancloud.ir/traefik:v3.6
     container_name: traefik
     ports:
       - "80:80"
