@@ -18,6 +18,13 @@
     "files": [
       "app/library/helpers.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.5"
   }
-
 }
