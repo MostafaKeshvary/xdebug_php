@@ -1,4 +1,4 @@
-FROM docker.arvancloud.ir/php:8.4.3-apache
+FROM php:8.4.3-apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 RUN echo "deb http://mirror.arvancloud.ir/debian bookworm main" > /etc/apt/sources.list
@@ -14,14 +14,18 @@ RUN apt-get install -y \
     net-tools \
     telnet \
     netcat-traditional \
-    && docker-php-ext-install pdo pdo_mysql zip \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-install pdo pdo_mysql zip
+
+COPY docker/storages/xdebug-3.5.3.tgz /tmp/xdebug-3.5.3.tgz
+RUN pecl install /tmp/xdebug-3.5.3.tgz
+RUN rm /tmp/xdebug-3.5.3.tgz
+
+RUN docker-php-ext-enable xdebug
 
 RUN touch /tmp/xdebug.log
 RUN chmod 777 /tmp/xdebug.log
 
-COPY config/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN a2enmod rewrite
 

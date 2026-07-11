@@ -1,15 +1,15 @@
 services:
-  traefik:
+  xdebug_traefik:
     image: docker.arvancloud.ir/traefik:v3.6
-    container_name: traefik
+    container_name: xdebug_traefik
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./config/traefik/traefik.yml:/traefik.yml:ro"
-      - "./config/traefik/dynamic_conf.yml:/dynamic_conf.yml:ro"
-      - "./config/traefik/certs:/certs:ro"
+      - "./docker/traefik/traefik.yml:/traefik.yml:ro"
+      - "./docker/traefik/dynamic_conf.yml:/dynamic_conf.yml:ro"
+      - "./docker/traefik/certs:/certs:ro"
     networks:
       - app-network
 
@@ -23,11 +23,11 @@ services:
     networks:
       - app-network
     depends_on:
-      - mysql
+      - xdebug_mysql
 
-  mysql:
+  xdebug_mysql:
     image: docker.arvancloud.ir/mysql:8.4.3
-    container_name: mysql
+    container_name: xdebug_mysql
     environment:
       MYSQL_DATABASE: xdebug_php
       MYSQL_ROOT_PASSWORD: 123456
